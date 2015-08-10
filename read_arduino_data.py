@@ -10,7 +10,7 @@ import os
 import re
 
 #uart = mraa.Uart(0)
-os.system("modprobe cdc-acm")
+os.system("/sbin/modprobe cdc-acm")
 acm_devices = [f for f in os.listdir("/dev") if re.match(r"^ttyACM[0-9]$", f)]
 print "ACM TTYs found:", acm_devices
 selected_device = "/dev/"+acm_devices[0]
