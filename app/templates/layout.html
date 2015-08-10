@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>{{ title }}</title>
+</head>
+<body>
+        <!-- Heading -->
+        <ul id="header">
+            <li>
+                <a href="http://www.intel.com.au/content/www/au/en/do-it-yourself/galileo-maker-quark-board.html" target="_blank"><img height="60" src="galileo.png" /></a>
+            </li>
+            <li style="width: 10em"><h1>Sensor Project</h1></li>
+            <li><a href="https://www.arduino.cc" target="_blank"><img height="60" src="arduino.jpg"/></a></li>
+            <li class="right"><a href="http://jmss.vic.edu.au" target="_blank"><img height="60" src="jmss.png" /></a></li>
+            <li class="right"><a href="http://www.youngictexplorers.net.au/" target="_blank"><img height="60" src="YICTE.png" /></a></li>
+        </ul>
+        {% block body %}{% endblock %}
+</body>
+</html>

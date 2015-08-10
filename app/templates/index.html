@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block body %}
+<article>
+    <div id="soundgraph"></div>
+    <button id="restore">Restore position</button>
+
+    <!-- Pop up boxes -->
+    <div id="about" class="overlay">
+        <div class="popup">
+            <a class="close" href="#">×</a>
+            <div class="content">
+                <h2>About</h2>
+                Project members:
+                <ul>
+                    <li>Pavel Zakopaylo</li>
+                    <li>Dylan Sanusi-Goh</li>
+                    <li>Arni Mittal</li>
+                    <li>Ethan Payne</li>
+                </ul>
+                
+                Thanks to Dr. Linda McIver for supervising this project.
+                
+                <h3>TODO:</h3>
+                <ul>
+                    <li>Calibrate data to meaningful units</li>
+                    <li>Show different sensor inputs (e.g. temperature, humidity, etc)</li>
+                    <li>Improve layout</li>
+                    <li>Add toolbar</li>
+                    <li><a href="https://www.google.com/url?q=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F18397655%2Fcharting-with-dygraphs-data-sampling-depending-on-zoom&sa=D&sntz=1&usg=AFQjCNEjTyHhxWmI-c7IK7bGgmVnZROzvw" target="_blank">Show lower resolution data when graph has been zoomed out</a></li>
+                    <li>Add "show data for past 24hrs" button</li>
+                    <li>Maybe a "skip back 24hrs" button</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="instructions" class="overlay">
+        <div class="popup">
+            <a class="close" href="#">×</a>
+            <div class="content">
+                <h2>Instructions</h2>
+                <p>Zoom in: double-click, scroll wheel</p>  
+                <p>Zoom out: ctrl-double-click, scroll wheel</p>
+                <p>Standard Zoom: shift-click-drag</p>
+                <p>Standard Pan: click-drag</p>
+                <p>Restore zoom level: press button</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="dygraph-combined.js"></script>
+    <script src="interaction-api.js"></script>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="script.js"></script>
+</article>
+<!-- Footer -->
+<footer>
+    <ul>
+        <a id="open_about" href="#about"><li>About Project</li></a>
+        <a id="open_instructions" href="#instructions"><li>Instructions</li></a>
+    </ul>
+</footer>
+{% endblock %}

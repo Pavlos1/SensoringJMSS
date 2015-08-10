@@ -1,0 +1,102 @@
+body {
+    font-family: 'Droid Sans', sans-serif;
+    margin: 0;
+}
+
+article {
+    width: 1080px;
+    margin: 0 auto;
+}
+
+#header {
+    width: 1080px;
+    margin: 1em auto;
+}
+
+#header, footer ul {
+    list-style: none;
+}
+
+#header li, footer ul li {
+    display: inline-block;
+}
+
+#header li {
+    padding: 0 1em;
+    vertical-align: top;
+}
+
+#header li .right {
+    float: right;
+}
+
+#soundgraph {
+    width: 960px;
+    height: 480px;
+    margin: 0 auto;
+}
+
+/* http://www.sevensignature.com/blog/code/pure-css-popup-without-javascript */
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+    position: relative;
+    transition: opacity 500ms;
+    margin: 70px auto;
+    padding: 20px;
+    z-index: 999;
+    background: white;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+    color: orange;
+}
+
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+
+
+footer {
+    background: #ccccff;
+}
+
+footer ul {
+    margin: 0;
+    padding: 0;
+}
+
+footer ul li {
+    width: 49%;
+    margin: 0;
+    padding: 1em 0;
+    text-align: center;
+}
