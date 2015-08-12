@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo avrdude -v -C ./avrdude.conf -c arduino -p ATMEGA328P -P $2 -b $3 -U flash:w:$1:i
+avrdude -v -C ./avrdude.conf -c arduino -p ATMEGA328P -P $2 -b $3 -U flash:w:$1:i
