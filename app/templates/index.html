@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 {% block body %}
 <article>
-    <button id="restore">Restore position</button>
-    <button id="zoomin">Zoom in</button>
-    <button id="zoomout">Zoom out</button>
-    <button id="panbackonehour">Pan back one hour</button>
-    <button id="panbackonehour">Pan forward one hour</button>
+    <div id="toolbar">
+        <button id="restore">Restore position</button>
+        <button id="zoomin">Zoom in</button>
+        <button id="zoomout">Zoom out</button>
+        <button id="panbackonehour">Pan back one hour</button>
+        <button id="panbackonehour">Pan forward one hour</button>
+    </div>
     <div id="soundgraph"></div>
     
     {% include "popup.html" %}

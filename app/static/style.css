@@ -30,6 +30,10 @@ article {
     float: right;
 }
 
+#toolbar {
+    text-align: center;
+}
+
 #soundgraph {
     width: 960px;
     height: 480px;
