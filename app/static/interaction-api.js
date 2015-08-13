@@ -1,7 +1,21 @@
-/*global Dygraph */
-// Code for a variety of interaction models. Used in interaction.html, but split out from
-// that file so they can be tested in isolation.
-//
+var interactionModel: {
+        'mousedown' : downV3,
+        'mousemove' : moveV3,
+        'mouseup' : upV3,
+        'click' : clickV3,
+        'dblclick' : dblClickV3,
+        'mousewheel' : scrollV3,
+        touchstart: function(event, g, context) {
+            Dygraph.Interaction.startTouch(event, g, context);
+        },
+        touchmove: function(event, g, context) {
+            Dygraph.Interaction.moveTouch(event, g, context);
+        },
+        touchend: function(event, g, context) {
+            Dygraph.Interaction.endTouch(event, g, context);
+        }
+};
+
 function downV3(event, g, context) {
   context.initializeMouseDown(event, g, context);
   if (event.altKey || event.shiftKey) {

@@ -11,14 +11,7 @@ var layout = {
     animatedZooms: true,
     title: "Galileo Sensor Chart",
     labels: ['Time', 'Sound Level (1 - 1024)'],
-    interactionModel: {
-        'mousedown' : downV3,
-        'mousemove' : moveV3,
-        'mouseup' : upV3,
-        'click' : clickV3,
-        'dblclick' : dblClickV3,
-        'mousewheel' : scrollV3
-    }
+    interactionModel: interactionModel
 }
 
 var compare = function (filter) {
