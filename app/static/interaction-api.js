@@ -16,6 +16,19 @@ var interactionModel = {
         }
 };
 
+document.getElementById('restore').addEventListener('click', function() {
+    restorePositioning(g);
+});
+
+document.getElementById('zoomin').addEventListener('click', function() {
+    zoom(g, 3/2 * 100, 0, 0);
+});
+
+document.getElementById('zoomout').addEventListener('click', function() {
+    zoom(g, 2/3 * 100, 0, 0);
+});
+
+
 function downV3(event, g, context) {
   context.initializeMouseDown(event, g, context);
   if (event.altKey || event.shiftKey) {

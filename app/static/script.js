@@ -29,10 +29,6 @@ var compare = function (filter) {
     };
 };
 
-document.getElementById('restore').addEventListener('click', function() {
-    restorePositioning(g);
-});
-
 function initialiseGraph() {
     g = new Dygraph(document.getElementById("soundgraph"), soundLevelData, layout);
 }
