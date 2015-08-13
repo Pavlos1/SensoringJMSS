@@ -1,4 +1,4 @@
-var interactionModel: {
+var interactionModel = {
         'mousedown' : downV3,
         'mousemove' : moveV3,
         'mouseup' : upV3,
