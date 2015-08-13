@@ -21,11 +21,11 @@ document.getElementById('restore').addEventListener('click', function() {
 });
 
 document.getElementById('zoomin').addEventListener('click', function() {
-    zoom(g, 50, 0, 0);
+    zoom(g, 1.5, 0, 0);
 });
 
 document.getElementById('zoomout').addEventListener('click', function() {
-    zoom(g, -50, 0, 0);
+    zoom(g, 0.5, 0, 0);
 });
 
 
