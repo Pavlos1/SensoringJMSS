@@ -1,5 +1,4 @@
 {% extends "layout.html" %}
-{% extends "popup.html" %}
 {% block body %}
 <article>
     <button id="restore">Restore position</button>
@@ -9,7 +8,7 @@
     <button id="panbackonehour">Pan forward one hour</button>
     <div id="soundgraph"></div>
     
-    {% block popup %}{% endblock %}
+    {% include "popup.html" %}
 
     <!-- Scripts -->
     <script src="dygraph-combined.js"></script>
