@@ -19,13 +19,13 @@ ser = serial.Serial(selected_device, 9600)
 while True:
     try:
         raw_sound = int(str(ser.readline()).rstrip("\n").rstrip("\r"))
+        # SQL data format is (time, light, colume, temperature, humidity)
+        # But for the test we will only do time+sound
+        con = sqlite3.connect("sound_test_data.db")
+        with con:
+            cur = con.cursor()
+            cur.execute("insert into data values (%d,%d)" %(int(time.time()), raw_sound))
+        con.close()
+        print raw_sound
     except:
         continue
-    # SQL data format is (time, light, colume, temperature, humidity)
-    # But for the test we will only do time+sound
-    con = sqlite3.connect("sound_test_data.db")
-    with con:
-        cur = con.cursor()
-        cur.execute("insert into data values (%d,%d)" %(int(time.time()), raw_sound))
-    con.close()
-    print raw_sound
