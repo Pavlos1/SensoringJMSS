@@ -6,8 +6,6 @@ var time_range = false;
 var soundLevelData = [];
 
 var layout = {
-    width: 960,
-    height: 540,
     drawPoints: true,
     showRoller: true,
     animatedZooms: true,
@@ -45,7 +43,7 @@ function send() {
             "init": init,
             "time": init ? 0 : g.xAxisRange()[1]
         };
-        
+
         if(!init && g.xAxisRange()[0] < g.xAxisExtremes()[0]) {
             output.startTime = parseInt(g.xAxisRange()[0]/1000);
             output.endTime = parseInt(g.xAxisExtremes()[0]/1000);
@@ -55,7 +53,7 @@ function send() {
             output.endTime = parseInt(g.xAxisRange()[1]/1000);
             console.log("loading later data");
         }
-        
+
         if(isConnected(ws)) {
             retries = MAX_RETRIES;
             ws.send(JSON.stringify(output));
@@ -100,7 +98,7 @@ function receive(msg) {
             init = false;
         } else updateGraph();
     }
-    
+
     send();
 }
 
@@ -122,9 +120,9 @@ window.addEventListener("load", function() {
     if ("WebSocket" in window) {
         ws = connect();
     };
-    
+
     set_footer_position();
-    
+
     send();
 
     window.onbeforeunload = disconnect;

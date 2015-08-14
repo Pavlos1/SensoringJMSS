@@ -35,6 +35,8 @@ article {
 }
 
 #soundgraph {
+    max-width: 960px;
+    max-height: 540px;
     margin: 0 auto;
 }
 
