@@ -6,6 +6,8 @@ var time_range = false;
 var soundLevelData = [];
 
 var layout = {
+    width: 960,
+    height: 540,
     drawPoints: true,
     showRoller: true,
     animatedZooms: true,
@@ -113,6 +115,7 @@ function set_footer_position() {
 
 window.addEventListener('resize', function() {
     set_footer_position();
+    g.resize(Math.min($(document.body).width(), layout.width));
 });
 
 window.addEventListener("load", function() {
