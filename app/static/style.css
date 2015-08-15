@@ -25,6 +25,11 @@ section {
     margin: 1em auto;
 }
 
+#header h1 {
+    margin: 0;
+    padding: 0;
+}
+
 #header, footer ul {
     list-style: none;
 }
