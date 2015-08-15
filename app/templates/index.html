@@ -1,28 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
-<article>
-    <div id="toolbar">
-        <button id="restore">Restore position</button>
-        <button id="zoomin">Zoom in</button>
-        <button id="zoomout">Zoom out</button>
-        <button id="panbackonehour">Pan back one hour</button>
-        <button id="panbackonehour">Pan forward one hour</button>
-    </div>
-    <div id="soundgraph"></div>
-    
-    {% include "popup.html" %}
+<div id="toolbar">
+    <button id="restore">Restore position</button>
+    <button id="zoomin">Zoom in</button>
+    <button id="zoomout">Zoom out</button>
+    <button id="panbackonehour">Pan back one hour</button>
+    <button id="panbackonehour">Pan forward one hour</button>
+</div>
+<div id="soundgraph"></div>
 
-    <!-- Scripts -->
-    <script src="dygraph-combined.js"></script>
-    <script src="interaction-api.js"></script>
-    <script src="jquery-2.1.4.min.js"></script>
-    <script src="script.js"></script>
-</article>
-<!-- Footer -->
-<footer>
-    <ul>
-        <a id="open_about" href="#about"><li>About Project</li></a>
-        <a id="open_instructions" href="#instructions"><li>Instructions</li></a>
-    </ul>
-</footer>
+{% include "popup.html" %}
+
+<!-- Scripts -->
+<script src="dygraph-combined.js"></script>
+<script src="interaction-api.js"></script>
+<script src="jquery-2.1.4.min.js"></script>
+<script src="script.js"></script>
 {% endblock %}

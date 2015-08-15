@@ -102,19 +102,7 @@ function receive(msg) {
     send();
 }
 
-function set_footer_position() {
-    // https://stackoverflow.com/questions/23095645/forcing-footer-to-bottom-of-page-if-document-height-is-smaller-than-window-heig
-    if ($(document.body).height() < $(window).height()) {
-        $('footer').attr('style', 'position: fixed!important; bottom: 0; left: 0; right: 0;');
-        $('article').attr('style', 'margin-bottom: ' + $('footer').height() + 'px');
-    } else {
-        $('footer').attr('style', 'position: static');
-        $('article').attr('style', 'margin-bottom: 0px');
-    }
-}
-
 window.addEventListener('resize', function() {
-    set_footer_position();
     g.resize(Math.min($(document.body).width(), layout.width));
 });
 
@@ -122,9 +110,7 @@ window.addEventListener("load", function() {
     if ("WebSocket" in window) {
         ws = connect();
     };
-
-    set_footer_position();
-
+    
     send();
 
     window.onbeforeunload = disconnect;
