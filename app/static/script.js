@@ -106,8 +106,10 @@ function set_footer_position() {
     // https://stackoverflow.com/questions/23095645/forcing-footer-to-bottom-of-page-if-document-height-is-smaller-than-window-heig
     if ($(document.body).height() < $(window).height()) {
         $('footer').attr('style', 'position: fixed!important; bottom: 0; left: 0; right: 0;');
+        $('article').attr('style', 'margin-bottom: ' + $('footer').height() + 'px');
     } else {
         $('footer').attr('style', 'position: static');
+        $('article').attr('style', 'margin-bottom: 0px');
     }
 }
 
