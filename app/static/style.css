@@ -35,13 +35,8 @@ article {
 }
 
 #soundgraph {
-    max-width: 960px;
-    max-height: 540px;
-    position: absolute;
-    left: 200px;
-    right: 10px;
-    top: 100px;
-    bottom: 10px;
+    width: 640px;
+    height: 480px;
     margin: 0 auto;
 }
 
@@ -96,6 +91,7 @@ article {
 
 footer {
     background: #ccccff;
+    z-index: 995;
 }
 
 footer ul {
