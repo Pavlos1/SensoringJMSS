@@ -16,6 +16,11 @@ article {
     padding-bottom: 60px; /* Height of footer element */
 }
 
+section {
+    width: 1080px;
+    margin: 0 auto;
+}
+
 #header {
     width: 1080px;
     margin: 1em auto;
