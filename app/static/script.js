@@ -11,7 +11,9 @@ var layout = {
     animatedZooms: true,
     title: "Galileo Sensor Chart",
     labels: ['Time', 'Sound Level (1 - 1024)'],
-    interactionModel: interactionModel
+    interactionModel: interactionModel,
+    width: $(document.body).width(),
+    height: 540
 }
 
 var compare = function (filter) {
@@ -103,14 +105,14 @@ function receive(msg) {
 }
 
 window.addEventListener('resize', function() {
-    g.resize(Math.min($(document.body).width(), layout.width));
+    g.resize($(document.body).width());
 });
 
 window.addEventListener("load", function() {
     if ("WebSocket" in window) {
         ws = connect();
     };
-    
+
     send();
 
     window.onbeforeunload = disconnect;
