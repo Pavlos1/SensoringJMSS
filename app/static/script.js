@@ -10,7 +10,7 @@ var layout = {
     showRoller: true,
     animatedZooms: true,
     title: "Galileo Sensor Chart",
-    labels: ['Time', 'Sound Level (1 - 1024)'],
+    labels: ['Time', 'Sound Level'],
     interactionModel: interactionModel,
     width: $(document.body).width(),
     height: 540
@@ -84,7 +84,7 @@ function disconnect() {
 }
 
 function parseRow(ele) {
-    return [new Date(parseInt(ele[0])*1000), parseInt(ele[1])];
+    return [new Date(parseInt(ele[0])*1000), parseInt(ele[1])*20];
 }
 
 function receive(msg) {
