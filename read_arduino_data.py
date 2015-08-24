@@ -32,5 +32,5 @@ while True:
             cur = con.cursor()
             cur.execute("insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), int(raw_data[0]), int(raw_data[1]), float(raw_data[2]), float(raw_data[3])))
         con.close()
-    except IndexError:
-        print "wtf"
+    except:
+        print "Something went wrong. Probably race condition. Continuing..."
