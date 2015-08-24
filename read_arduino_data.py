@@ -30,7 +30,7 @@ while True:
         con = sqlite3.connect("sensor_data.db")
         with con:
             cur = con.cursor()
-            cur.execute("insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), raw_data[0], raw_data[1], raw_data[2], raw_data[3]))
+            cur.execute("insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), int(raw_data[0]), int(raw_data[1]), float(raw_data[2]), float(raw_data[3])))
         con.close()
     except IndexError:
         print "wtf"
