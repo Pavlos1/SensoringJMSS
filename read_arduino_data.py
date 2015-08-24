@@ -32,7 +32,5 @@ while True:
             cur = con.cursor()
             cur.execute("insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), raw_data[0], raw_data[1], raw_data[2], raw_data[3]))
         con.close()
-    except Exception as e:
-        ex_type, ex, tb = sys.exc_info()
-	traceback.print_tb(tb)
-	continue
+    except IndexError:
+        print "wtf"
