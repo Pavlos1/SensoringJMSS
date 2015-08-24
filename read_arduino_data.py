@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
-# Written by Pavel.
-# License: WTFPL; if you change the source, you must also change the name.
+# Written by Pavel
+# License: CC BY-SA 4.0
 
 #import mraa
 import serial
@@ -18,14 +18,17 @@ ser = serial.Serial(selected_device, 9600)
 
 while True:
     try:
-        raw_sound = int(str(ser.readline()).rstrip("\n").rstrip("\r"))
+        raw_data = str(ser.readline()).rstrip("\n").rstrip("\r").split("|")
+	print raw_data
+	if len(raw_data) != 4:
+		print "wrong length"
+		continue
         # SQL data format is (time, light, colume, temperature, humidity)
-        # But for the test we will only do time+sound
-        con = sqlite3.connect("sound_test_data.db")
+        con = sqlite3.connect("sensor_data.db")
         with con:
             cur = con.cursor()
-            cur.execute("insert into data values (%d,%d)" %(int(time.time()), raw_sound))
+            cur.execute("insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), raw_data[0], raw_data[1], raw_data[2], raw_data[3]))
         con.close()
-        print raw_sound
     except:
-        continue
+        print "unknown error occurred"
+	continue
