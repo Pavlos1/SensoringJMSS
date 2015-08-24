@@ -9,6 +9,9 @@ import time
 import os
 import re
 
+import sys
+import traceback
+
 #uart = mraa.Uart(0)
 os.system("/sbin/modprobe cdc-acm")
 acm_devices = [f for f in os.listdir("/dev") if re.match(r"^ttyACM[0-9]$", f)]
@@ -29,6 +32,7 @@ while True:
             cur = con.cursor()
             cur.execute("insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), raw_data[0], raw_data[1], raw_data[2], raw_data[3]))
         con.close()
-    except:
-        print "unknown error occurred"
+    except Exception as e:
+        tb = sys.exc_info()
+	traceback.print_tb(tb)
 	continue
