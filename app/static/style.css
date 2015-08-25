@@ -12,6 +12,7 @@ html, body {
 
 article {
     margin: 0 auto;
+    padding-bottom: 60px;
 }
 
 section {
@@ -113,6 +114,7 @@ footer {
     z-index: 995;
     height: 60px;
     width: 100%;
+    font-size: 0.8em;
     position: absolute;
     bottom: 0;
     left: 0;
