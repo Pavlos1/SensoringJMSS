@@ -4,6 +4,10 @@ var retries = MAX_RETRIES;
 var g = false;
 var time_range = false;
 var levelData = [];
+var lightLevelData = [];
+var soundLevelData = [];
+var tempLevelData = [];
+var humLevelData = [];
 
 var layout = {
     drawPoints: true,
@@ -32,11 +36,11 @@ var compare = function (filter) {
 };
 
 function initialiseGraph() {
-    g = new Dygraph(document.getElementById("soundgraph"), levelData, layout);
+    g = new Dygraph(document.getElementById("soundgraph"), lightLevelData, layout);
 }
 
 function updateGraph() {
-    g.updateOptions({'file': levelData});
+    g.updateOptions({'file': lightLevelData});
 }
 
 function send() {
@@ -102,6 +106,12 @@ function receive(msg) {
         levelData = levelData.concat(rows.map(parseRow)).sort(function(a, b) {
             return a[0] - b[0];
         }).filter(function(ele, pos, arr) { return arr.indexOf(ele) == pos; });
+            
+        lightLevelData = levelData.map(function(ele) { return [ele[0], ele[1]] });
+        soundLevelData = levelData.map(function(ele) { return [ele[0], ele[2]] });
+        tempLevelData = levelData.map(function(ele) { return [ele[0], ele[3]] });
+        humLevelData = levelData.map(function(ele) { return [ele[0], ele[4]] });
+        
         if(init) {
             initialiseGraph();
             init = false;
