@@ -57,7 +57,7 @@ section {
     top: 120px;
     bottom: 80px;
     left: 0;
-    right: 0;
+    right: 20px;
 }
 
 /* http://www.sevensignature.com/blog/code/pure-css-popup-without-javascript */
