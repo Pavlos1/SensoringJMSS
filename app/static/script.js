@@ -86,10 +86,10 @@ function parseRow(ele) {
     // (timestamp, light, sound, temperature, humidity) -> (int 4, int 4 int 4, real, real).
     var time = new Date(parseInt(ele[0])*1000);
     return [
-        [time, parseInt(ele[1])],
-        [time, parseInt(ele[2])], 
-        [time, parseFloat(ele[3])],
-        [time, parseFloat(ele[4])]
+        [time, parseInt(ele[1]), null, null, null],
+        [time, null, parseInt(ele[2]), null, null], 
+        [time, null, null, parseFloat(ele[3]), null],
+        [time, null, null, null, parseFloat(ele[4])]
     ];
 }
 
