@@ -10,6 +10,7 @@ var layout = {
     showRoller: true,
     animatedZooms: true,
     title: "Galileo Sensor Chart",
+    labels: ['Time', 'Light Level', 'Sound level', 'Temperature level', 'Humidity level'],
     interactionModel: interactionModel,
     width: $(document.body).width(),
     height: 540
@@ -31,7 +32,7 @@ var compare = function (filter) {
 };
 
 function initialiseGraph() {
-    g = new Dygraph(document.getElementById("soundgraph"), levelData, layout);
+    g = new Dygraph(document.getElementById("sensorgraph"), levelData, layout);
 }
 
 function updateGraph() {
@@ -84,12 +85,12 @@ function disconnect() {
 
 function parseRow(ele) {
     // (timestamp, light, sound, temperature, humidity) -> (int 4, int 4 int 4, real, real).
-    var time = new Date(parseInt(ele[0])*1000);
     return [
-        [time, parseInt(ele[1]), null, null, null],
-        [time, null, parseInt(ele[2]), null, null], 
-        [time, null, null, parseFloat(ele[3]), null],
-        [time, null, null, null, parseFloat(ele[4])]
+        new Date(parseInt(ele[0])*1000),
+        parseInt(ele[1]),
+        parseInt(ele[2]), 
+        parseFloat(ele[3]),
+        parseFloat(ele[4])
     ];
 }
 
@@ -99,7 +100,7 @@ function receive(msg) {
     console.log(rows.length);
     if(rows.length) {
         levelData = levelData.concat(rows.map(parseRow)).sort(function(a, b) {
-            return a[0][0] - b[0][0];
+            return a[0] - b[0];
         }).filter(function(ele, pos, arr) { return arr.indexOf(ele) == pos; });
         
         if(init) {
