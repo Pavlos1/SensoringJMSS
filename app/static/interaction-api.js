@@ -16,6 +16,10 @@ var interactionModel = {
         }
 };
 
+function change(el) {
+    g.setVisibility(parseInt(el.id), el.checked);
+}
+
 document.getElementById('restore').addEventListener('click', function() {
     restorePositioning(g);
 });
