@@ -4,17 +4,12 @@ var retries = MAX_RETRIES;
 var g = false;
 var time_range = false;
 var levelData = [];
-var lightLevelData = [];
-var soundLevelData = [];
-var tempLevelData = [];
-var humLevelData = [];
 
 var layout = {
     drawPoints: true,
     showRoller: true,
     animatedZooms: true,
     title: "Galileo Sensor Chart",
-    labels: ['Time', 'Sound Level'],
     interactionModel: interactionModel,
     width: $(document.body).width(),
     height: 540
@@ -36,11 +31,11 @@ var compare = function (filter) {
 };
 
 function initialiseGraph() {
-    g = new Dygraph(document.getElementById("soundgraph"), lightLevelData, layout);
+    g = new Dygraph(document.getElementById("soundgraph"), levelData, layout);
 }
 
 function updateGraph() {
-    g.updateOptions({'file': lightLevelData});
+    g.updateOptions({'file': levelData});
 }
 
 function send() {
@@ -89,12 +84,12 @@ function disconnect() {
 
 function parseRow(ele) {
     // (timestamp, light, sound, temperature, humidity) -> (int 4, int 4 int 4, real, real).
+    var time = new Date(parseInt(ele[0])*1000);
     return [
-        new Date(parseInt(ele[0])*1000),
-        parseInt(ele[1]),
-        parseInt(ele[2]), 
-        parseFloat(ele[3]),
-        parseFloat(ele[4])
+        [time, parseInt(ele[1])],
+        [time, parseInt(ele[2])], 
+        [time, parseFloat(ele[3])],
+        [time, parseFloat(ele[4])]
     ];
 }
 
@@ -104,13 +99,8 @@ function receive(msg) {
     console.log(rows.length);
     if(rows.length) {
         levelData = levelData.concat(rows.map(parseRow)).sort(function(a, b) {
-            return a[0] - b[0];
+            return a[0][0] - b[0][0];
         }).filter(function(ele, pos, arr) { return arr.indexOf(ele) == pos; });
-            
-        lightLevelData = levelData.map(function(ele) { return [ele[0], ele[1]] });
-        soundLevelData = levelData.map(function(ele) { return [ele[0], ele[2]] });
-        tempLevelData = levelData.map(function(ele) { return [ele[0], ele[3]] });
-        humLevelData = levelData.map(function(ele) { return [ele[0], ele[4]] });
         
         if(init) {
             initialiseGraph();
