@@ -2,11 +2,11 @@ html, body {
     font-family: 'Droid Sans', sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 99%;
 }
 
 #wrapper {
-    min-height: 100%;
+    min-height: 99%;
     position: relative;
 }
 
