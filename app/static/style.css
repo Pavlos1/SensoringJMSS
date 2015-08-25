@@ -51,6 +51,10 @@ section {
     text-align: center;
 }
 
+#sensorgraphContainer {
+    position: relative;
+}
+
 #sensorgraph {
     margin: 0 auto;
     position: absolute;
