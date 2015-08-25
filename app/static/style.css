@@ -12,7 +12,7 @@ html, body {
 
 article {
     margin: 0 auto;
-    padding-bottom: 60px; /* Height of footer element */
+    padding-bottom: 59px;
 }
 
 section {
@@ -51,14 +51,10 @@ section {
     text-align: center;
 }
 
-#sensorgraphContainer {
-    position: relative;
-}
-
 #sensorgraph {
     margin: 0 auto;
     position: absolute;
-    top: 0;
+    top: 200px;
     bottom: 60px;
     left: 0;
     right: 0;
