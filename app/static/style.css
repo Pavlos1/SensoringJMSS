@@ -2,14 +2,17 @@ html, body {
     font-family: 'Droid Sans', sans-serif;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 #wrapper {
+    min-height: 100%;
     position: relative;
 }
 
 article {
     margin: 0 auto;
+    padding-bottom: 60px;
 }
 
 section {
@@ -69,6 +72,7 @@ section {
   transition: opacity 500ms;
   visibility: hidden;
   opacity: 0;
+  display: none;
 }
 .overlay:target {
   visibility: visible;
@@ -109,11 +113,11 @@ section {
 footer {
     background: #ccccff;
     z-index: 995;
-    height: 40px;
+    height: 60px;
     width: 100%;
-    font-size: 0.8em;
-    margin: 0;
-    padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     align-items: center;
 }
 
@@ -125,6 +129,6 @@ footer ul {
 footer ul li {
     width: 32%;
     margin: 0;
-    padding: 0;
+    padding: 1em 0;
     text-align: center;
 }
