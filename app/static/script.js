@@ -3,7 +3,7 @@ var MAX_RETRIES = 3;
 var retries = MAX_RETRIES;
 var g = false;
 var time_range = false;
-var soundLevelData = [];
+var levelData = [];
 
 var layout = {
     drawPoints: true,
@@ -32,11 +32,11 @@ var compare = function (filter) {
 };
 
 function initialiseGraph() {
-    g = new Dygraph(document.getElementById("soundgraph"), soundLevelData, layout);
+    g = new Dygraph(document.getElementById("soundgraph"), levelData, layout);
 }
 
 function updateGraph() {
-    g.updateOptions({'file': soundLevelData});
+    g.updateOptions({'file': levelData});
 }
 
 function send() {
@@ -84,7 +84,14 @@ function disconnect() {
 }
 
 function parseRow(ele) {
-    return [new Date(parseInt(ele[0])*1000), parseInt(ele[1])*20];
+    # (timestamp, light, sound, temperature, humidity) -> (int 4, int 4 int 4, real, real).
+    return [
+        new Date(parseInt(ele[0])*1000),
+        parseInt(ele[1]),
+        parseInt(ele[2]), 
+        parseFloat(ele[3]),
+        parseFloat(ele[4])
+    ];
 }
 
 function receive(msg) {
@@ -92,7 +99,7 @@ function receive(msg) {
     var rows = data;
     console.log(rows.length);
     if(rows.length) {
-        soundLevelData = soundLevelData.concat(rows.map(parseRow)).sort(function(a, b) {
+        levelData = levelData.concat(rows.map(parseRow)).sort(function(a, b) {
             return a[0] - b[0];
         }).filter(function(ele, pos, arr) { return arr.indexOf(ele) == pos; });
         if(init) {

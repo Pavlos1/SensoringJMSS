@@ -17,7 +17,7 @@ def handle_websocket(ws):
             timestamp = message['time']
             try:
                 file_dir = os.path.dirname(__file__)
-                filename = os.path.join(file_dir, '../sound_test_data.db')
+                filename = os.path.join(file_dir, '../sensor_data.db')
                 con = lite.connect(filename)
                 
                 cur = con.cursor()
@@ -30,10 +30,12 @@ def handle_websocket(ws):
                     cur.execute('select * from data where time > ?;', (timestamp,))
                 rows = cur.fetchall()
                 #if(len(rows)):
+                """
                 if(len(rows) > 0 and rows[0] == app.app.row):
                     ws.send(
                         json.dumps({first: True, time: rows[0][0]})
                     )
+                """
                 ws.send(
                     json.dumps(rows)
                 )
