@@ -13,7 +13,7 @@ var layout = {
     labels: ['Time', 'Light Level', 'Sound level', 'Temperature level', 'Humidity level'],
     interactionModel: interactionModel,
     width: $(document.body).width(),
-    height: 540
+    height: $(window).height() - $(document).height() - 50
 }
 
 var compare = function (filter) {
@@ -113,7 +113,7 @@ function receive(msg) {
 }
 
 window.addEventListener('resize', function() {
-    g.resize($(document.body).width());
+    g.resize($(document.body).width(), $(window).height() - $(document).height() - 50);
 });
 
 window.addEventListener("load", function() {
