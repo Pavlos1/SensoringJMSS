@@ -84,7 +84,7 @@ function disconnect() {
 }
 
 function parseRow(ele) {
-    # (timestamp, light, sound, temperature, humidity) -> (int 4, int 4 int 4, real, real).
+    // (timestamp, light, sound, temperature, humidity) -> (int 4, int 4 int 4, real, real).
     return [
         new Date(parseInt(ele[0])*1000),
         parseInt(ele[1]),
