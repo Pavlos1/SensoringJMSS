@@ -51,8 +51,12 @@ section {
     text-align: center;
 }
 
-#soundgraph {
+#sensorgraph {
     margin: 0 auto;
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
 }
 
 /* http://www.sevensignature.com/blog/code/pure-css-popup-without-javascript */
