@@ -31,6 +31,12 @@ document.getElementById('zoomin').addEventListener('click', function() {
 document.getElementById('zoomout').addEventListener('click', function() {
     zoom(g, -0.5);
 });
+document.getElementById('panforwardonehour').addEventListener('click', function() {
+    xPan(g, 3600);
+});
+document.getElementById('panbackonehour').addEventListener('click', function() {
+    xPan(g, -3600);
+});
 
 
 function downV3(event, g, context) {
@@ -163,6 +169,14 @@ function zoom(g, zoomInPercentage, xBias, yBias) {
   g.updateOptions({
     dateWindow: adjustAxis(g.xAxisRange(), zoomInPercentage, xBias),
     valueRange: newYAxes[0]
+    });
+}
+
+// Pans forward by pAmount on the x-axis
+// Written by Pavel; Licensed under CC BY-SA 4.0
+function xPan(g, panAmount) {
+    g.updateOptions({
+        dateWindow: [g.xAxisRange()[0] + panAmount, g.xAxisRange()[1] + panAmount]
     });
 }
 
