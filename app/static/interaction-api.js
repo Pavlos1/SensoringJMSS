@@ -32,10 +32,10 @@ document.getElementById('zoomout').addEventListener('click', function() {
     zoom(g, -0.5);
 });
 document.getElementById('panforwardonehour').addEventListener('click', function() {
-    xPan(g, 3600);
+    xPan(g, 3600000);
 });
 document.getElementById('panbackonehour').addEventListener('click', function() {
-    xPan(g, -3600);
+    xPan(g, -3600000);
 });
 
 
