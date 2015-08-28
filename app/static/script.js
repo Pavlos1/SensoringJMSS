@@ -10,7 +10,7 @@ var layout = {
     showRoller: true,
     animatedZooms: true,
     title: "Galileo Sensor Chart",
-    labels: ['Time', 'Light Level', 'Sound level', 'Temperature level', 'Humidity level'],
+    labels: ['Time', 'Light (lux)', 'Sound (rel)', 'Temperature (centigrade)', 'Humidity (%)'],
     interactionModel: interactionModel
 }
 
@@ -85,7 +85,7 @@ function parseRow(ele) {
     // (timestamp, light, sound, temperature, humidity) -> (int 4, int 4 int 4, real, real).
     return [
         new Date(parseInt(ele[0])*1000),
-        parseInt(ele[1]),
+        parseInt(ele[1]) * 16, // calibrate to lux by multiplying value by 16
         parseInt(ele[2]), 
         parseFloat(ele[3]),
         parseFloat(ele[4])
