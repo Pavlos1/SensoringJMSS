@@ -12,6 +12,7 @@ import re
 import sys
 import traceback
 
+error_count = 0
 #uart = mraa.Uart(0)
 os.system("/sbin/modprobe cdc-acm")
 acm_devices = [f for f in os.listdir("/dev") if re.match(r"^ttyACM[0-9]$", f)]
@@ -33,4 +34,8 @@ while True:
             cur.execute("insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), int(raw_data[0]), int(raw_data[1]), float(raw_data[2]), float(raw_data[3])))
         con.close()
     except:
-        print "Something went wrong. Probably race condition. Continuing..."
+        error_count += 1
+        print "Something went wrong. Probably race condition. Continuing... %d" %error_count
+        if error_count > 19:
+            print "Bailing..."
+            system("reboot")
