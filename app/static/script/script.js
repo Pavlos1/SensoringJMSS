@@ -2,7 +2,6 @@ var init = true;
 var MAX_RETRIES = 3;
 var retries = MAX_RETRIES;
 var g = false;
-var time_range = false;
 var levelData = [];
 
 var layout = {
@@ -13,21 +12,6 @@ var layout = {
     labels: ['Time', 'Light (lux)', 'Sound (rel)', 'Temperature (centigrade)', 'Humidity (%)'],
     interactionModel: interactionModel
 }
-
-var compare = function (filter) {
-    return function (a,b) { //closure
-        var a = a[filter],
-            b = b[filter];
-
-        if (a < b) {
-            return -1;
-        }else if (a > b) {
-            return 1;
-        } else {
-            return 0;
-        }
-    };
-};
 
 function initialiseGraph() {
     g = new Dygraph(document.getElementById("sensorgraph"), levelData, layout);
@@ -61,7 +45,6 @@ function send() {
             ws = connect();
         } else {
             alert("Unable to connect to server after " + MAX_RETRIES + " retries");
-            clearInterval(c);
         }
     }, 1000);
 }

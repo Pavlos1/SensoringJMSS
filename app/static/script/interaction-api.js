@@ -25,11 +25,11 @@ document.getElementById('restore').addEventListener('click', function() {
 });
 
 document.getElementById('zoomin').addEventListener('click', function() {
-    zoom(g, 0.5);
+    zoom(g, +0.2);
 });
 
 document.getElementById('zoomout').addEventListener('click', function() {
-    zoom(g, -0.5);
+    zoom(g, -0.25);
 });
 document.getElementById('panforwardonehour').addEventListener('click', function() {
     xPan(g, 3600000);
@@ -178,87 +178,6 @@ function xPan(g, panAmount) {
     g.updateOptions({
         dateWindow: [g.xAxisRange()[0] + panAmount, g.xAxisRange()[1] + panAmount]
     });
-}
-
-var v4Active = false;
-var v4Canvas = null;
-
-function downV4(event, g, context) {
-  context.initializeMouseDown(event, g, context);
-  v4Active = true;
-  moveV4(event, g, context); // in case the mouse went down on a data point.
-}
-
-var processed = [];
-
-function moveV4(event, g, context) {
-  var RANGE = 7;
-
-  if (v4Active) {
-    var graphPos = Dygraph.findPos(g.graphDiv);
-    var canvasx = Dygraph.pageX(event) - graphPos.x;
-    var canvasy = Dygraph.pageY(event) - graphPos.y;
-
-    var rows = g.numRows();
-    // Row layout:
-    // [date, [val1, stdev1], [val2, stdev2]]
-    for (var row = 0; row < rows; row++) {
-      var date = g.getValue(row, 0);
-      var x = g.toDomCoords(date, null)[0];
-      var diff = Math.abs(canvasx - x);
-      if (diff < RANGE) {
-        for (var col = 1; col < 3; col++) {
-          // TODO(konigsberg): these will throw exceptions as data is removed.
-          var vals =  g.getValue(row, col);
-          if (vals === null || vals === undefined) { continue; }
-          var val = vals[0];
-          var y = g.toDomCoords(null, val)[1];
-          var diff2 = Math.abs(canvasy - y);
-          if (diff2 < RANGE) {
-            var found = false;
-            for (var i in processed) {
-              var stored = processed[i];
-              if(stored[0] == row && stored[1] == col) {
-                found = true;
-                break;
-              }
-            }
-            if (!found) {
-              processed.push([row, col]);
-              drawV4(x, y);
-            }
-            return;
-          }
-        }
-      }
-    }
-  }
-}
-
-function upV4(event, g, context) {
-  if (v4Active) {
-    v4Active = false;
-  }
-}
-
-function dblClickV4(event, g, context) {
-  restorePositioning(g);
-}
-
-function drawV4(x, y) {
-  var ctx = v4Canvas;
-
-  ctx.strokeStyle = "#000000";
-  ctx.fillStyle = "#FFFF00";
-  ctx.beginPath();
-  ctx.arc(x,y,5,0,Math.PI*2,true);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
-}
-
-function captureCanvas(canvas, area, g) {
-  v4Canvas = canvas;
 }
 
 function restorePositioning(g) {
