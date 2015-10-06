@@ -38,4 +38,4 @@ while True:
         print "Something went wrong. Probably race condition. Continuing... %d" %error_count
         if error_count > 19:
             print "Bailing..."
-            os.system("reboot")
+            os.system("/sbin/reboot")
