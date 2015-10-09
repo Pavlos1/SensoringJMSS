@@ -10,8 +10,8 @@ import mraa
 light = mraa.Aio(0)
 sound = mraa.Aio(1)
 temp = mraa.I2c(0)
-i2c.address(0x49)
-i2c.writeWordReg(1, 0b1011000001100000)
+temp.address(0x49)
+temp.writeWordReg(1, 0b1011000001100000)
 error_count = 0
 
 while True:
@@ -32,18 +32,20 @@ while True:
                 lsb >>= 4
                 msb <<= 4
             correct_read = msb | lsb
-        temp_t += (correct_read * 0.0625)
+            temp_t += (correct_read * 0.0625)
+            time.sleep(0.1)
         con = sqlite3.connect("sensor_data.db")
         with con:
             cur = con.cursor()
-            cur.exec("insert into data (%d,%d,%d,%f,%f)" %(int(time.time()), int(light_t/50), int(sound_t/50), temp_t/50, 0))
+            command = "insert into data (%d,%d,%d,%f,%f)" %(int(time.time()), int(light_t/50), int(sound_t/50), temp_t/50, 0)
+            print command
+            cur.execute(command)
         con.close()
         error_count = 0
-        time.sleep(0.1)
     except:
-        if error_count < 20:
+        error_count += 1
+        if error_count < 50:
             print "Something went wrong. Continuing... %d" %error_count
         else:
-            print "error_count >= 20. Bailing..."
-            raise SystemExit
-            #os.system("/sbin/reboot")
+            print "error_count >= 50. Bailing..."
+            os.system("/sbin/reboot")
