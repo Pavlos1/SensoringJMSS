@@ -22,7 +22,7 @@ while True:
         for i in range(0, 50):
             light_t += light.read()
             sound_t += sound.read()
-            raw_read = i2c.readWordReg(0)
+            raw_read = temp.readWordReg(0)
             msb = raw_read & 0b11111111
             lsb = (raw_read >> 8)
             if (lsb & 1) == 1:
