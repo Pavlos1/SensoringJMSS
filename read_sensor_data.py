@@ -7,7 +7,7 @@ import time
 import os
 import mraa
 
-light = mraa.Aio(0)
+light = mraa.Aio(5)
 sound = mraa.Aio(1)
 temp = mraa.I2c(0)
 temp.address(0x49)
