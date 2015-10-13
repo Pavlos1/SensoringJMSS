@@ -7,7 +7,7 @@ import time
 import os
 import mraa
 
-light = mraa.Aio(5)
+light = mraa.Aio(0)
 sound = mraa.Aio(1)
 temp = mraa.I2c(0)
 temp.address(0x49)
@@ -37,7 +37,7 @@ while True:
         con = sqlite3.connect("sensor_data.db")
         with con:
             cur = con.cursor()
-            command = "insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), int(light_t/50), int(sound_t/50), temp_t/50, 0)
+            command = "insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), int(light_t/50 - 290), int(sound_t/50), temp_t/50, 0)
             print command
             cur.execute(command)
         con.close()
