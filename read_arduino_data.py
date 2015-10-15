@@ -36,6 +36,6 @@ while True:
     except:
         error_count += 1
         print "Something went wrong. Probably race condition. Continuing... %d" %error_count
-        if error_count > 19:
+        if error_count >= 50:
             print "Bailing..."
             os.system("/sbin/reboot")
