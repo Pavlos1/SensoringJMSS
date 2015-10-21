@@ -16,8 +16,8 @@ error_count = 0
 #uart = mraa.Uart(0)
 #os.system("/sbin/modprobe cdc-acm")
 devices = [f for f in os.listdir("/dev") if re.match(r"^ttyS[0-9]$", f)]
-print "GS TTYs found:", devices
-selected_device = "/dev/"+devices[0]
+print "Serial TTYs found:", devices
+selected_device = "/dev/"+sorted(devices)[0]
 ser = serial.Serial(selected_device, 9600)
 
 while True:
