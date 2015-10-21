@@ -14,10 +14,10 @@ import traceback
 
 error_count = 0
 #uart = mraa.Uart(0)
-os.system("/sbin/modprobe cdc-acm")
-acm_devices = [f for f in os.listdir("/dev") if re.match(r"^ttyACM[0-9]$", f)]
-print "ACM TTYs found:", acm_devices
-selected_device = "/dev/"+acm_devices[0]
+#os.system("/sbin/modprobe cdc-acm")
+devices = [f for f in os.listdir("/dev") if re.match(r"^ttyGS[0-9]$", f)]
+print "GS TTYs found:", devices
+selected_device = "/dev/"+devices[0]
 ser = serial.Serial(selected_device, 9600)
 
 while True:
