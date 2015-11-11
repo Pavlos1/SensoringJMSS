@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 # Written by Pavel
-# License: CC BY-SA 4.0
+# License: BSD
 
 import sqlite3
 import time
