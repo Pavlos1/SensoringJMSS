@@ -15,8 +15,8 @@ import traceback
 error_count = 0
 #uart = mraa.Uart(0)
 #os.system("/sbin/modprobe cdc-acm")
-devices = [f for f in os.listdir("/dev") if re.match(r"^ttyUSB[0-9]$", f)]
-print "CH34x/FTDI TTYs found:", devices
+devices = [f for f in os.listdir("/dev") if re.match(r"^ttyUSB[0-9]$", f)] + [f for f in os.listdir("/dev") if re.match(r"^ttyACM[0-9]$", f)]
+print "USB TTYs found:", devices
 selected_device = "/dev/"+sorted(devices)[0]
 ser = serial.Serial(selected_device, 9600)
 
