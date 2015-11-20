@@ -13,9 +13,9 @@ i2c = mraa.I2c(0)
 #pins A0 and A1 tied to ground, so address is 0x40
 i2c.address(0x40)
 #reset hdc1008
-i2c.writeReg(2, 144L)
+i2c.writeReg(0x02, 144L)
 #configuration; see datasheet. sets hdc1008 to measure temperature and humidity simultaneously
-i2c.writeReg(2, 16L)
+i2c.writeReg(0x02, 16L)
 error_count = 0
 
 while True:
@@ -27,12 +27,11 @@ while True:
         for i in range(0, 50):
             light_t += light.read()
             sound_t += sound.read()
-            #writing to register 0 starts measurement
+            #writing to register 0 and then requesting a read starts measurement; see datasheet
             i2c.writeWordReg(0x00, 0L)
+            i2c.writeByte(0x000)
             #allow the sensor time to take measurement. 100ms is overkill, actually.
             time.sleep(0.1)
-            #begin read operation
-            i2c.writeByte(0)
             #read 4 bytes; 2 for temperature and 2 for humidity
             i2c_read = i2c.read(4)
             # conversions to SI; see data sheet
