@@ -9,9 +9,13 @@ import mraa
 
 light = mraa.Aio(0)
 sound = mraa.Aio(1)
-temp = mraa.I2c(0)
-temp.address(0x49)
-temp.writeWordReg(1, 0b1011000001100000)
+i2c = mraa.I2c(0)
+#pins A0 and A1 tied to ground, so address is 0x40
+i2c.address(0x40)
+#reset hdc1008
+i2c.writeReg(2, 144L)
+#configuration; see datasheet. sets hdc1008 to measure temperature and humidity simultaneously
+i2c.writeReg(2, 16L)
 error_count = 0
 
 while True:
@@ -19,25 +23,25 @@ while True:
         light_t = 0
         sound_t = 0
         temp_t = 0
+        humid_t = 0
         for i in range(0, 50):
             light_t += light.read()
             sound_t += sound.read()
-            raw_read = temp.readWordReg(0)
-            msb = raw_read & 0b11111111
-            lsb = (raw_read >> 8)
-            if (lsb & 1) == 1:
-                lsb >>= 3
-                msb <<= 5
-            else:
-                lsb >>= 4
-                msb <<= 4
-            correct_read = msb | lsb
-            temp_t += (correct_read * 0.0625)
+            #writing to register 0 starts measurement
+            i2c.writeWordReg(0x00, 0L)
+            #allow the sensor time to take measurement. 100ms is overkill, actually.
             time.sleep(0.1)
+            #begin read operation
+            i2c.writeByte(0)
+            #read 4 bytes; 2 for temperature and 2 for humidity
+            i2c_read = i2c.read(4)
+            # conversions to SI; see data sheet
+            temp_t += ((((i2c_read[0] << 8) | i2c_read[1]) * 165.0) / (2**16)) - 40.0
+            humid_t += float((i2c_read[2] << 8) | i2c_read[3]) / (2**16)
         con = sqlite3.connect("sensor_data.db")
         with con:
             cur = con.cursor()
-            command = "insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), int(light_t/50 - 288), int(sound_t/50), temp_t/50, 0)
+            command = "insert into data values (%d,%d,%d,%f,%f)" %(int(time.time()), int(light_t/50 - 288), int(sound_t/50), temp_t/50, humid_t/50)
             print command
             cur.execute(command)
         con.close()
