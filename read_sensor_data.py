@@ -36,7 +36,7 @@ while True:
             i2c_read = i2c.read(4)
             # conversions to SI; see data sheet
             temp_t += ((((i2c_read[0] << 8) | i2c_read[1]) * 165.0) / (2**16)) - 40.0
-            humid_t += float((i2c_read[2] << 8) | i2c_read[3]) / (2**16)
+            humid_t += float(((i2c_read[2] << 8) | i2c_read[3]) * 100) / (2**16)
         con = sqlite3.connect("sensor_data.db")
         with con:
             cur = con.cursor()
