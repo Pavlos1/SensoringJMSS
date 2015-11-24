@@ -18,7 +18,11 @@ location = urllib2.urlopen(location_request).geturl()
 data = { "UserName": "Monash\\"+username,
          "Password": password,
          "AuthMethod": "FormsAuthentication" }
-req = urllib2.Request(location, urllib.urlencode(data))
+         
+headers = { "Referer": location,
+            "Location": location }
+            
+req = urllib2.Request(location, urllib.urlencode(data), headers)
 resp = urllib2.urlopen(req)
 html = resp.read()
 
