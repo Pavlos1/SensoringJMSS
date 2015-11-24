@@ -6,14 +6,16 @@
 
 import urllib
 import urllib2
+import os
 
 print "Please enter your Authcate credentials..."
 username = raw_input("Username: ")
 password = raw_input("Password: ")
 print "Processing, please wait..."
 
-location = urllib2.urlopen('https://my.monash.edu.au').geturl()
-data = { "UserName": "Monash%5C"+username,
+location_request = urllib2.Request("https://my.monash.edu.au")
+location = urllib2.urlopen(location_request).geturl()
+data = { "UserName": "Monash\\"+username,
          "Password": password,
          "AuthMethod": "FormsAuthentication" }
 req = urllib2.Request(location, urllib.urlencode(data))
@@ -21,6 +23,6 @@ resp = urllib2.urlopen(req)
 html = resp.read()
 
 print "Login completed. The resulting page has been saved in ~/misc/login.html"
-fp = open("~/login.html", "w")
+fp = open(os.path.expanduser("~/misc/login.html"), "w")
 fp.write(html)
 fp.close()
