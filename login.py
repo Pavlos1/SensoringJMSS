@@ -6,6 +6,7 @@
 
 import urllib
 import urllib2
+import cookielib
 import os
 
 print "Please enter your Authcate credentials..."
@@ -13,8 +14,11 @@ username = raw_input("Username: ")
 password = raw_input("Password: ")
 print "Processing, please wait..."
 
+cj = cookielib.CookieJar()
+opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+
 location_request = urllib2.Request("https://my.monash.edu.au")
-location = urllib2.urlopen(location_request).geturl()
+location = opener.open(location_request).geturl()
 data = { "UserName": "Monash\\"+username,
          "Password": password,
          "AuthMethod": "FormsAuthentication" }
@@ -23,8 +27,10 @@ headers = { "Referer": location,
             "Location": location }
             
 req = urllib2.Request(location, urllib.urlencode(data), headers)
-resp = urllib2.urlopen(req)
-html = resp.read()
+resp = opener.open(req)
+req2 = urllib2.Request("https://my.monash.edu.au", None, headers)
+resp2 = opener.open(req2)
+html = resp2.read()
 
 print "Login completed. The resulting page has been saved in ~/misc/login.html"
 fp = open(os.path.expanduser("~/misc/login.html"), "w")
